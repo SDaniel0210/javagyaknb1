@@ -41,7 +41,7 @@ public class CrudController {
 
     // MÓDOSÍTÁS
     @PostMapping("/crud/{id}/update")
-    public String update(@PathVariable Integer id, CrudLabdarugo form) {
+    public String update(@PathVariable Long id, CrudLabdarugo form) {
         var j = repo.findById(id).orElseThrow();
         j.setNev(form.getNev());
         j.setMezszam(form.getMezszam());
@@ -57,7 +57,7 @@ public class CrudController {
 
     // TÖRLÉS
     @PostMapping("/crud/{id}/delete")
-    public String delete(@PathVariable Integer id) {
+    public String delete(@PathVariable Long id) {
         repo.deleteById(id);
         return "redirect:/crud";
     }
