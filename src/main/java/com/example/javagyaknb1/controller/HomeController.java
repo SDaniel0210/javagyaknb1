@@ -16,11 +16,6 @@ public class HomeController {
         return "kapcsolat";
     }
 
-    @GetMapping("/crud")
-    public String crud() {
-        return "crud";
-    }
-
     @GetMapping("/bejelentkezes")
     public String login() {
         return "login";

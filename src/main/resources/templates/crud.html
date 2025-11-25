@@ -1,0 +1,155 @@
+<!DOCTYPE HTML>
+<html lang="hu" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <title>web 2 előadás beadandó</title>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no" />
+
+    <link rel="stylesheet" th:href="@{/stylesheets/main.css}" />
+    <link rel="stylesheet" th:href="@{/stylesheets/overlay.css}" />
+    <noscript><link rel="stylesheet" th:href="@{/stylesheets/noscript.css}" /></noscript>
+
+    <link rel="shortcut icon" th:href="@{/images/football.png}" type="image/x-icon">
+</head>
+
+<body class="is-preload">
+<div id="wrapper" class="fade-in">
+
+    <!-- Intro -->
+    <div id="intro">
+        <h1>NB1 játékoskereső</h1>
+        <p>Ez egy oldal, ami az NB1-es játékosokről készült el.</p>
+        <ul class="actions">
+            <li><a href="#header" class="button scrolly">Tovább</a></li>
+        </ul>
+    </div>
+
+    <!-- Header -->
+    <header id="header">
+        <a th:href="@{/}" class="logo">NB1</a>
+    </header>
+
+    <!-- NAV -->
+    <nav id="nav">
+        <ul class="links">
+            <li><a th:href="@{/}">Főoldal</a></li>
+            <li><a th:href="@{/adatbazis}">Adatbázis</a></li>
+            <li><a th:href="@{/kapcsolat}">Kapcsolat</a></li>
+            <li><a th:href="@{/diagram}">Diagram</a></li>
+            <li class="active"><a th:href="@{/crud}">CRUD</a></li>
+            <li><a th:href="@{/bejelentkezes}">Bejelentkezés</a></li>
+            <li><a th:href="@{/regisztracio}">Regisztráció</a></li>
+        </ul>
+    </nav>
+
+    <!-- MAIN -->
+    <div id="main">
+        <h4><a id="openOverlay">Új játékos hozzáadása</a></h4>
+        <h3>Hozzáadott játékosok táblázata</h3>
+
+        <table class="table">
+            <thead>
+            <tr>
+                <th>Mezszám</th>
+                <th>Név</th>
+                <th>Klub</th>
+                <th>Poszt</th>
+                <th>Kor</th>
+                <th>Érték</th>
+                <th>Szerkesztés</th>
+                <th>Törlés</th>
+            </tr>
+            </thead>
+
+            <tbody>
+            <tr th:each="j : ${crudJatekosok}">
+                <th th:text="${j.mezszam}"></th>
+                <td th:text="${j.nev}"></td>
+                <td th:text="${j.csapat}"></td>
+                <td th:text="${j.poszt}"></td>
+                <td th:text="${j.kor}"></td>
+                <td>
+                    <span th:text="${j.ertek}"></span> ezer €
+                </td>
+
+                <!-- Szerkesztés gomb -->
+                <td>
+                    <button class="btn szerkeszt-btn"
+                            th:attr="
+                    data-id=${j.id},
+                    data-nev=${j.nev},
+                    data-mezszam=${j.mezszam},
+                    data-poszt=${j.poszt},
+                    data-csapat=${j.csapat},
+                    data-ertek=${j.ertek},
+                    data-kor=${j.kor}
+                  ">
+                        Szerkesztés
+                    </button>
+                </td>
+
+                <!-- Törlés -->
+                <td>
+                    <form th:action="@{'/crud/' + ${j.id} + '/delete'}" method="post">
+                        <button class="btn">Törlés</button>
+                    </form>
+                </td>
+            </tr>
+            </tbody>
+        </table>
+    </div>
+
+    <!-- OVERLAY FORM -->
+    <div id="overlay" class="overlay">
+        <div class="overlay-content">
+            <h4 id="overlayTitle">Új játékos hozzáadása</h4>
+
+            <form id="jatekosForm" method="POST">
+                <input type="hidden" name="id" id="jatekosId">
+
+                <input type="text" name="nev" id="nevInput" placeholder="Név" required>
+                <input type="text" name="mezszam" id="mezInput" placeholder="Mezszám" required>
+                <input type="text" name="poszt" id="posztInput" placeholder="Poszt" required>
+                <input type="text" name="csapat" id="csapatInput" placeholder="Csapat" required>
+                <input type="text" name="ertek" id="ertekInput" placeholder="Érték" required>
+                <input type="text" name="kor" id="korInput" placeholder="Kor" required>
+
+                <div class="d-flex mt-3">
+                    <button type="button" id="closeOverlay" class="btn">Mégse</button>
+                    <button type="submit" id="submitBtn" class="btn">Mentés</button>
+                </div>
+            </form>
+        </div>
+    </div>
+
+    <!-- Footer -->
+    <footer id="footer">
+        <section class="split contact">
+            <section class="alt">
+                <h3>Készítők</h3>
+                <p>Falusi Tamás Rajmund (IVXW8X)<br/>Samu Dániel (NN8T44)</p>
+            </section>
+        </section>
+    </footer>
+
+    <div id="copyright">
+        <ul>
+            <li>&copy; Untitled</li>
+            <li>Design: <a href="https://html5up.net">HTML5 UP</a></li>
+        </ul>
+    </div>
+
+</div>
+
+<!-- Scripts -->
+<script th:src="@{/javascripts/jquery.min.js}"></script>
+<script th:src="@{/javascripts/jquery.scrollex.min.js}"></script>
+<script th:src="@{/javascripts/jquery.scrolly.min.js}"></script>
+<script th:src="@{/javascripts/browser.min.js}"></script>
+<script th:src="@{/javascripts/breakpoints.min.js}"></script>
+<script th:src="@{/javascripts/util.js}"></script>
+<script th:src="@{/javascripts/main.js}"></script>
+<script th:src="@{/javascripts/overlay.js}"></script>
+
+</body>
+</html>
