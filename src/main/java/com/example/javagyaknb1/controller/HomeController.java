@@ -1,4 +1,4 @@
-package com.example.javagyaknb1;
+package com.example.javagyaknb1.controller;
 
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -9,11 +9,6 @@ public class HomeController {
     @GetMapping("/")
     public String index() {
         return "fooldal";
-    }
-
-    @GetMapping("/adatbazis")
-    public String adatbazis() {
-        return "adatbazis";
     }
 
     @GetMapping("/kapcsolat")
