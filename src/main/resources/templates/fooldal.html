@@ -34,23 +34,7 @@
     </header>
 
     <!-- Nav -->
-    <nav id="nav" xmlns:th="http://www.thymeleaf.org" xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity3">
-        <ul class="links">
-            <li class="active"><a th:href="@{/}">Főoldal</a></li>
-            <li><a th:href="@{/adatbazis}">Adatbázis</a></li>
-            <li><a th:href="@{/kapcsolat}">Kapcsolat</a></li>
-            <li sec:authorize="isAuthenticated()"><a th:href="@{/uzenet}">Üzenetek</a></li>
-            <li><a th:href="@{/diagram}">Diagram</a></li>
-            <li><a th:href="@{/crud}">CRUD</a></li>
-            <li  sec:authorize="hasRole('ROLE_ADMIN')"><a th:href="@{/admin}">Admin</a></li>
-            <li sec:authorize="isAuthenticated()"><a sec:authentication="principal.nev"></a></li>
-            <form method="POST" action="/logout" sec:authorize="isAuthenticated()">
-                <button type="submit" class="btn btn-danger">Kijelentkezés</button>
-            </form>
-            <li><a sec:authorize="isAnonymous()" th:href="@{/bejelentkezes}">Bejelentkezés</a></li>
-            <li><a sec:authorize="isAnonymous()" th:href="@{/regisztracio}">Regisztráció</a></li>
-        </ul>
-    </nav>
+    <nav th:replace="fragments/navbar :: nav(active='fooldal')"></nav>
 
     <!-- Main -->
     <div id="main">
@@ -72,22 +56,7 @@
     </div>
 
     <!-- Footer -->
-    <footer id="footer">
-        <section class="split contact">
-            <section class="alt">
-                <h3>Készítők</h3>
-                <p>Falusi Tamás Rajmund (IVXW8X)<br/>Samu Dániel (NN8T44)</p>
-            </section>
-        </section>
-    </footer>
-
-    <div id="copyright">
-        <ul>
-            <li>&copy; Untitled</li>
-            <li>Design: <a href="https://html5up.net">HTML5 UP</a></li>
-        </ul>
-    </div>
-
+    <footer id="footer" th:replace="fragments/footer"></footer>
 </div>
 
 <!-- Scripts -->

@@ -1,0 +1,49 @@
+<nav id="nav" th:fragment="nav(active)" xmlns:th="http://www.thymeleaf.org"
+     xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
+    <ul class="links">
+
+        <li th:classappend="${active} == 'fooldal' ? 'active': '' ">
+            <a href="/">Főoldal</a>
+        </li>
+
+        <li th:classappend="${active} == 'adatbazis' ? 'active': '' ">
+            <a href="/adatbazis">Adatbázis</a>
+        </li>
+
+        <li th:classappend="${active} == 'kapcsolat' ? 'active': '' ">
+            <a href="/kapcsolat">Kapcsolat</a>
+        </li>
+
+        <li th:classappend="${active} == 'crud' ? 'active': '' ">
+            <a href="/crud">CRUD</a>
+        </li>
+
+        <li sec:authorize="isAuthenticated()"
+            th:classappend="${active} == 'uzenet' ? 'active': '' ">
+            <a href="/uzenet">Üzenetek</a>
+        </li>
+
+        <li sec:authorize="hasAuthority('ADMIN')"
+            th:classappend="${active} == 'admin' ? 'active': '' ">
+            <a href="/admin">Admin</a>
+        </li>
+
+        <li sec:authorize="isAuthenticated()">
+            <a sec:authentication="principal.nev"></a>
+        </li>
+
+        <li sec:authorize="isAuthenticated()">
+            <form method="POST" action="/logout" style="display:inline;">
+                <button class="btn btn-danger">Kijelentkezés</button>
+            </form>
+        </li>
+
+        <li sec:authorize="isAnonymous()">
+            <a href="/bejelentkezes">Bejelentkezés</a>
+        </li>
+
+        <li sec:authorize="isAnonymous()">
+            <a href="/regisztracio">Regisztráció</a>
+        </li>
+    </ul>
+</nav>
