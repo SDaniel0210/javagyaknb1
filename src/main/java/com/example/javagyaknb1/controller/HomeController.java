@@ -16,11 +16,6 @@ public class HomeController {
         return "kapcsolat";
     }
 
-    @GetMapping("/diagram")
-    public String diagram() {
-        return "diagram";
-    }
-
     @GetMapping("/crud")
     public String crud() {
         return "crud";
