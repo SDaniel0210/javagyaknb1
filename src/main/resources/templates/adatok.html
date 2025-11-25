@@ -33,15 +33,21 @@
     </header>
 
     <!-- Nav -->
-    <nav id="nav">
+    <nav id="nav" xmlns:th="http://www.thymeleaf.org" xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity3">
         <ul class="links">
             <li><a th:href="@{/}">Főoldal</a></li>
             <li class="active"><a th:href="@{/adatbazis}">Adatbázis</a></li>
             <li><a th:href="@{/kapcsolat}">Kapcsolat</a></li>
+            <li sec:authorize="isAuthenticated()"><a th:href="@{/uzenet}">Üzenetek</a></li>
             <li><a th:href="@{/diagram}">Diagram</a></li>
             <li><a th:href="@{/crud}">CRUD</a></li>
-            <li><a th:href="@{/bejelentkezes}">Bejelentkezés</a></li>
-            <li><a th:href="@{/regisztracio}">Regisztráció</a></li>
+            <li  sec:authorize="hasRole('ROLE_ADMIN')"><a th:href="@{/admin}">Admin</a></li>
+            <li sec:authorize="isAuthenticated()"><a sec:authentication="principal.nev"></a></li>
+            <form method="POST" action="/logout" sec:authorize="isAuthenticated()">
+                <button type="submit" class="btn btn-danger">Kijelentkezés</button>
+            </form>
+            <li><a sec:authorize="isAnonymous()" th:href="@{/bejelentkezes}">Bejelentkezés</a></li>
+            <li><a sec:authorize="isAnonymous()" th:href="@{/regisztracio}">Regisztráció</a></li>
         </ul>
     </nav>
 

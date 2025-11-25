@@ -1,6 +1,8 @@
 package com.example.javagyaknb1.controller;
 
+import com.example.javagyaknb1.model.User;
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 
 @Controller
@@ -18,11 +20,12 @@ public class HomeController {
 
     @GetMapping("/bejelentkezes")
     public String login() {
-        return "login";
+        return "bejelentkezes";
     }
 
     @GetMapping("/regisztracio")
-    public String register() {
+    public String registerPage(Model model) {
+        model.addAttribute("user", new User());
         return "regisztracio";
     }
 
