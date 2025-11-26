@@ -13,11 +13,6 @@ public class HomeController {
         return "fooldal";
     }
 
-    @GetMapping("/kapcsolat")
-    public String kapcsolat() {
-        return "kapcsolat";
-    }
-
     @GetMapping("/bejelentkezes")
     public String login() {
         return "bejelentkezes";

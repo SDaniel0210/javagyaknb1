@@ -14,13 +14,17 @@
             <a href="/kapcsolat">Kapcsolat</a>
         </li>
 
-        <li th:classappend="${active} == 'crud' ? 'active': '' ">
-            <a href="/crud">CRUD</a>
-        </li>
-
         <li sec:authorize="isAuthenticated()"
             th:classappend="${active} == 'uzenet' ? 'active': '' ">
             <a href="/uzenet">Üzenetek</a>
+        </li>
+
+        <li th:classappend="${active} == 'diagram' ? 'active': '' ">
+            <a href="/diagram">Diagram</a>
+        </li>
+
+        <li th:classappend="${active} == 'crud' ? 'active': '' ">
+            <a href="/crud">CRUD</a>
         </li>
 
         <li sec:authorize="hasAuthority('ADMIN')"

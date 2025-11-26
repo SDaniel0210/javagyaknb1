@@ -1,5 +1,7 @@
 package com.example.javagyaknb1.model;
 import jakarta.persistence.*;
+
+import java.util.ArrayList;
 import java.util.List;
 
 @Entity
@@ -17,8 +19,8 @@ public class User {
     @Column(name = "role")
     private String role;
 
-    //@OneToMany(mappedBy = "user", fetch = FetchType.LAZY)
-    //private List<Uzenet> uzenetek = new ArrayList<>();
+    @OneToMany(mappedBy = "user")
+    private List<Uzenet> uzenetek;
 
     public User() {
     }
@@ -52,10 +54,10 @@ public class User {
     public void setRole(String role) {
         this.role = role;
     }
-    /*public List<Uzenet> getUzenetek() {
+    public List<Uzenet> getUzenetek() {
         return uzenetek;
     }
     public void setUzenetek(List<Uzenet> uzenetek) {
         this.uzenetek = uzenetek;
-    }*/
+    }
 }

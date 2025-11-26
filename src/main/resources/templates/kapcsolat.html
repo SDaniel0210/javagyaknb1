@@ -1,11 +1,83 @@
 <!DOCTYPE HTML>
-<html lang="hu" xmlns:th="http://www.thymeleaf.org">
+<html lang="hu" xmlns:th="http://www.thymeleaf.org" xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
 <head>
-    <meta charset="UTF-8">
-    <title>Kapcsolat</title>
+    <title>NB1 játékoskereső</title>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no" />
+
+    <!-- CSS -->
+    <link rel="stylesheet" th:href="@{/stylesheets/main.css}" />
+    <noscript>
+        <link rel="stylesheet" th:href="@{/stylesheets/noscript.css}" />
+    </noscript>
+
+    <link rel="shortcut icon"
+          th:href="@{/images/football.png}"
+          type="image/x-icon">
 </head>
-<body>
-<h2>In progress</h2>
+
+<body class="is-preload">
+<div id="wrapper" class="fade-in">
+
+    <!-- Intro -->
+    <div id="intro">
+        <h1>NB1 játékoskereső</h1>
+        <p>Ez egy oldal, ami az NB1-es játékosokről készült el.</p>
+        <ul class="actions">
+            <li><a href="#header" class="button scrolly">Tovább</a></li>
+        </ul>
+    </div>
+
+    <!-- Header -->
+    <header id="header">
+        <a th:href="@{/}" class="logo">NB1</a>
+    </header>
+
+    <!-- Nav -->
+    <nav th:replace="fragments/navbar :: nav(active='kapcsolat')"></nav>
+
+    <!-- Main -->
+    <div id="main">
+        <h2>Irjon nekünk üzenetet!</h2>
+        <!-- Posts -->
+        <section class="post featured">
+            <p th:if="${param.sikeres}" style="color: green">Üzenet sikeresen elküldve!</p>
+            </p>
+            <h4 style="color:red;" sec:authorize="isAnonymous()">Bejelentkezés szükséges!</h4>
+            <section>
+                <form method="post" th:action="@{/kapcsolat}" th:object="${formUzenet}">
+                    <div class="fields">
+                        <div class="field">
+                            <label>Cím</label>
+                            <input type="text" th:field="*{cim}"
+                                   th:disabled="${#authorization.expr('isAnonymous()')}">
+                        </div>
+                        <div class="field">
+                            <label>Üzenet</label>
+                            <textarea th:field="*{uzenet}"
+                                      th:disabled="${#authorization.expr('isAnonymous()')}"></textarea>
+                        </div>
+                    </div>
+                    <ul class="actions" id="middle">
+                        <li><input type="submit" value="Elküldés"  th:disabled="${#authorization.expr('isAnonymous()')}"/></li>
+                    </ul>
+                </form>
+            </section>
+        </section>
+    </div>
+
+    <!-- Footer -->
+    <footer id="footer" th:replace="fragments/footer"></footer>
+</div>
+
+<!-- Scripts -->
+<script th:src="@{/javascripts/jquery.min.js}"></script>
+<script th:src="@{/javascripts/jquery.scrollex.min.js}"></script>
+<script th:src="@{/javascripts/jquery.scrolly.min.js}"></script>
+<script th:src="@{/javascripts/browser.min.js}"></script>
+<script th:src="@{/javascripts/breakpoints.min.js}"></script>
+<script th:src="@{/javascripts/util.js}"></script>
+<script th:src="@{/javascripts/main.js}"></script>
 
 </body>
 </html>
