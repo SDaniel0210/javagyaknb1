@@ -1,0 +1,78 @@
+<!DOCTYPE HTML>
+<html lang="hu" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <title>NB1 játékoskereső</title>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no" />
+
+    <!-- CSS -->
+    <link rel="stylesheet" th:href="@{/stylesheets/main.css}" />
+    <noscript>
+        <link rel="stylesheet" th:href="@{/stylesheets/noscript.css}" />
+    </noscript>
+
+    <link rel="shortcut icon"
+          th:href="@{/images/football.png}"
+          type="image/x-icon">
+</head>
+
+<body class="is-preload">
+<div id="wrapper" class="fade-in">
+
+    <!-- Intro -->
+    <div id="intro">
+        <h1>NB1 játékoskereső</h1>
+        <p>Ez egy oldal, ami az NB1-es játékosokről készült el.</p>
+        <ul class="actions">
+            <li><a href="#header" class="button scrolly">Tovább</a></li>
+        </ul>
+    </div>
+
+    <!-- Header -->
+    <header id="header">
+        <a th:href="@{/}" class="logo">NB1</a>
+    </header>
+
+    <!-- Nav -->
+    <nav th:replace="fragments/navbar :: nav(active='uzenet')"></nav>
+
+    <!-- Main -->
+    <div id="main">
+        <h2>Elküldött üzenetek</h2>
+
+        <section class="posts">
+            <article th:each="uzenet : ${uzenetek}">
+                <header>
+                    <span class="date"
+                          th:text="${#temporals.format(uzenet.letrehozas, 'yyyy.MM.dd HH:mm')}">
+                    </span>
+
+                    <h2 th:text="${uzenet.cim}"></h2>
+                </header>
+
+                <p th:text="${uzenet.uzenet}"></p>
+
+                <form th:action="@{/uzenet/{id}/delete(id=${uzenet.id})}"
+                      method="post"
+                      onsubmit="return confirm('Biztosan törölni szeretnéd?')">
+                    <button type="submit" class="btn">Törlés</button>
+                </form>
+            </article>
+        </section>
+    </div>
+
+    <!-- Footer -->
+    <footer id="footer" th:replace="fragments/footer"></footer>
+</div>
+
+<!-- Scripts -->
+<script th:src="@{/javascripts/jquery.min.js}"></script>
+<script th:src="@{/javascripts/jquery.scrollex.min.js}"></script>
+<script th:src="@{/javascripts/jquery.scrolly.min.js}"></script>
+<script th:src="@{/javascripts/browser.min.js}"></script>
+<script th:src="@{/javascripts/breakpoints.min.js}"></script>
+<script th:src="@{/javascripts/util.js}"></script>
+<script th:src="@{/javascripts/main.js}"></script>
+
+</body>
+</html>

@@ -5,7 +5,7 @@ import com.example.javagyaknb1.model.User;
 import com.example.javagyaknb1.repository.UzenetRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
-
+import java.util.Optional;
 import java.util.List;
 
 @Service
@@ -25,6 +25,11 @@ public class UzenetService {
     public List<Uzenet> getAllUzenetek() {
         return UzenetRepo.findAllByOrderByLetrehozasDesc();
     }
+
+    public Optional<Uzenet> findById(int id) {
+        return UzenetRepo.findById(id);
+    }
+
 
     public void delete(int id) {
         UzenetRepo.deleteById(id);

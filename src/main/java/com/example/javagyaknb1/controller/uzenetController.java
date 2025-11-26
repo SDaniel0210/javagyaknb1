@@ -34,4 +34,37 @@ public class uzenetController {
 
         return "redirect:/kapcsolat?sikeres";
     }
+
+    @GetMapping("/uzenet")
+    public String sajatUzenetek(Model model, @AuthenticationPrincipal UserDetails currentUser) {
+        User user = userRepo.findByEmail(currentUser.getUsername()).orElseThrow();
+        model.addAttribute("uzenetek", uzenetService.getUserUzenetek(user));
+        return "uzenet";
+    }
+
+    @PostMapping("/uzenet/{id}/delete")
+    public String delete(@PathVariable int id, @AuthenticationPrincipal UserDetails currentUser) {
+
+        Uzenet u = uzenetService.findById(id).orElseThrow();
+
+        // csak a saját üzenetét törölhesse
+        if (!u.getUser().getEmail().equals(currentUser.getUsername())) {
+            return "redirect:/uzenet?hiba";
+        }
+
+        uzenetService.delete(id);
+        return "redirect:/uzenet?torolve";
+    }
+
+    @GetMapping("/admin")
+    public String adminUzenetek(Model model) {
+        model.addAttribute("uzenetek", uzenetService.getAllUzenetek());
+        return "admin";
+    }
+
+    @PostMapping("/admin/{id}/delete")
+    public String adminDelete(@PathVariable int id) {
+        uzenetService.delete(id);
+        return "redirect:/admin?torolve";
+    }
 }
