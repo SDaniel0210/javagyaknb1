@@ -5,7 +5,7 @@ document.addEventListener('DOMContentLoaded', async () => {
     const ctx = canvas.getContext('2d');
 
     try {
-        const response = await fetch('/api/diagramdata');
+        const response = await fetch('api/diagramdata');
 
         if (!response.ok) {
             throw new Error('HTTP hiba: ' + response.status);

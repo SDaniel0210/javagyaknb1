@@ -10,7 +10,7 @@ document.addEventListener("DOMContentLoaded", () => {
     // ÚJ JÁTÉKOS
     openBtn.addEventListener("click", () => {
         title.textContent = "Új játékos hozzáadása";
-        form.action = "/crud";
+        form.action = "/NN8T44-gy/crud";
         form.reset();
         overlay.style.display = "flex";
     });
@@ -26,7 +26,7 @@ document.addEventListener("DOMContentLoaded", () => {
             title.textContent = "Játékos szerkesztése";
 
             const id = btn.dataset.id;
-            form.action = `/crud/${id}/update`;
+            form.action = `/NN8T44-gy/crud/${id}/update`;
 
             // mezők feltöltése
             document.getElementById("nevInput").value = btn.dataset.nev;

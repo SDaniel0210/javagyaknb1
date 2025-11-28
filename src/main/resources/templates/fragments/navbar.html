@@ -3,33 +3,33 @@
     <ul class="links">
 
         <li th:classappend="${active} == 'fooldal' ? 'active': '' ">
-            <a href="/">Főoldal</a>
+            <a href="/NN8T44-gy/">Főoldal</a>
         </li>
 
         <li th:classappend="${active} == 'adatbazis' ? 'active': '' ">
-            <a href="/adatbazis">Adatbázis</a>
+            <a href="/NN8T44-gy/adatbazis">Adatbázis</a>
         </li>
 
         <li th:classappend="${active} == 'kapcsolat' ? 'active': '' ">
-            <a href="/kapcsolat">Kapcsolat</a>
+            <a href="/NN8T44-gy/kapcsolat">Kapcsolat</a>
         </li>
 
         <li sec:authorize="isAuthenticated()"
             th:classappend="${active} == 'uzenet' ? 'active': '' ">
-            <a href="/uzenet">Üzenetek</a>
+            <a href="/NN8T44-gy/uzenet">Üzenetek</a>
         </li>
 
         <li th:classappend="${active} == 'diagram' ? 'active': '' ">
-            <a href="/diagram">Diagram</a>
+            <a href="/NN8T44-gy/diagram">Diagram</a>
         </li>
 
         <li th:classappend="${active} == 'crud' ? 'active': '' ">
-            <a href="/crud">CRUD</a>
+            <a href="/NN8T44-gy/crud">CRUD</a>
         </li>
 
         <li sec:authorize="hasAuthority('ADMIN')"
             th:classappend="${active} == 'admin' ? 'active': '' ">
-            <a href="/admin">Admin</a>
+            <a href="/NN8T44-gy/admin">Admin</a>
         </li>
 
         <li sec:authorize="isAuthenticated()">
@@ -37,17 +37,17 @@
         </li>
 
         <li sec:authorize="isAuthenticated()">
-            <form method="POST" action="/logout" style="display:inline;">
+            <form method="POST" action="/NN8T44-gy/logout" style="display:inline;">
                 <button class="btn btn-danger">Kijelentkezés</button>
             </form>
         </li>
 
         <li sec:authorize="isAnonymous()">
-            <a href="/bejelentkezes">Bejelentkezés</a>
+            <a href="/NN8T44-gy/bejelentkezes">Bejelentkezés</a>
         </li>
 
         <li sec:authorize="isAnonymous()">
-            <a href="/regisztracio">Regisztráció</a>
+            <a href="/NN8T44-gy/regisztracio">Regisztráció</a>
         </li>
     </ul>
 </nav>
